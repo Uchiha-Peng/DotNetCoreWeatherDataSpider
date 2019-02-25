@@ -86,12 +86,12 @@ namespace CwTestApp.Models
                        CityEnglishName="HaiKou"
                 },new City(){
                      ID=9,
-                      CityName="西安",
-                       CityEnglishName="XiAn"
+                      CityName="南宁",
+                       CityEnglishName="NanNing"
                 },new City(){
                      ID=10,
-                      CityName="北京",
-                       CityEnglishName="BeiJing"
+                      CityName="拉萨",
+                       CityEnglishName="LaSa"
                 }
             };
             db.AddRange(cities);

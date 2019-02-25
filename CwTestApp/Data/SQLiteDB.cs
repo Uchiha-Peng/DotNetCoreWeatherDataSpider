@@ -14,7 +14,7 @@ namespace CwTestApp.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=C:/Users/Amaterasu/source/repos/CwTestApp/CwTestApp/Weather.db");
+            optionsBuilder.UseSqlite("Data Source=Weather.db");
 
         }
 

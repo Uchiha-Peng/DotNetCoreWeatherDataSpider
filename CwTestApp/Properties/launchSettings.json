@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CwTestApp": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Amaterasu\\Documents\\GitHub\\DotNetCoreWeatherDataSpider\\CwTestApp"
+    }
+  }
+}
