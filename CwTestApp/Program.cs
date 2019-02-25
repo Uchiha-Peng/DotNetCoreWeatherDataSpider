@@ -23,14 +23,6 @@ namespace CwTestApp
             try
             {
                 cities = await City.GetCitys();
-                //var t =await db.Weathers.ToListAsync();
-                //Tool.SaveJson<Weather>(t);
-                //foreach (var item in cities)
-                //{
-                //    int count = db.Weathers.Count(n => n.CityID == item.ID);
-                //    Console.WriteLine(item.CityName + ":" + count);
-                //}
-                //Console.ReadKey();
             }
             catch (Exception ex)
             {
@@ -46,7 +38,10 @@ namespace CwTestApp
                 {
                     string yearmounth = now.AddMonths(-i).ToString("yyyyMM");
                     var url = $@"http://www.tianqihoubao.com/lishi/{city.CityEnglishName}/month/{yearmounth}.html";
-                    bool b = await GetDataFormHtml(url, city.ID);
+                    //保存到数据库
+                    //bool b = await GetDataFormHtmlAndSaveToDB(url, city.ID);
+                    //打印到控制台
+                    bool b = await ConsoleWeatherData(url);
                 }
                 Tool.WriteLog("消息", "===============" + city.CityName + "获取结束===============");
             }
@@ -55,7 +50,10 @@ namespace CwTestApp
 
         }
 
-        public static async Task<bool> GetDataFormHtml(string url, int cityID)
+        /// <summary>
+        /// 从Web抓取天气数据，并存储在SQLite中
+        /// </summary>
+        public static async Task<bool> GetDataFormHtmlAndSaveToDB(string url, int cityID)
         {
             try
             {
@@ -138,11 +136,10 @@ namespace CwTestApp
         /// <summary>
         /// 从Web抓取天气数据，并打印在控制台
         /// </summary>
-        public async void ConsoleWeatherData()
+        public static async Task<bool> ConsoleWeatherData(string url)
         {
             try
             {
-                string url = "http://www.tianqihoubao.com/lishi/shiyan/month/201901.html";
                 using (HttpClient client = new HttpClient())
                 {
                     HttpResponseMessage resp = await client.GetAsync(url);
@@ -187,13 +184,14 @@ namespace CwTestApp
                                 Console.Write("\r\n");
                             }
                         }
-                        Console.WriteLine("Bad Request！");
                     }
                 }
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
         #endregion
